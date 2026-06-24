@@ -1,0 +1,972 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>BaRsa – Il Piacere di Stare Insieme</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;0,900;1,700&family=Dancing+Script:wght@700&family=Nunito:wght@300;400;600;700;800&display=swap" rel="stylesheet"/>
+<style>
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+/* ── PALETTE DAL LOGO: blu scuro, verde lime, azzurro cielo ── */
+:root {
+  --blu:       #0D3B7A;   /* blu scuro logo */
+  --blu-med:   #1A5EA8;   /* blu medio logo */
+  --azzurro:   #2E8DC8;   /* azzurro logo */
+  --verde:     #6DB33F;   /* verde lime logo */
+  --verde-sc:  #4A8A1E;   /* verde scuro */
+  --crema:     #F4F8FC;   /* sfondo freddo-neutro */
+  --carta:     #E8F0F9;   /* card leggera blu */
+  --bianco:    #FFFFFF;
+  --testo:     #1C2B3A;
+  --grigio:    #607080;
+  --accent:    #38A169;   /* verde accento prezzi */
+}
+
+html { font-size: 17px; scroll-behavior: smooth; }
+
+body {
+  font-family: 'Nunito', sans-serif;
+  background: var(--crema);
+  color: var(--testo);
+  line-height: 1.65;
+}
+
+/* ── HEADER ── */
+header {
+  background: linear-gradient(135deg, var(--blu) 0%, var(--blu-med) 60%, var(--azzurro) 100%);
+  padding: 2.5rem 1.5rem 2rem;
+  text-align: center;
+  position: relative;
+  overflow: hidden;
+}
+.header-logo {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 1.2rem;
+  flex-wrap: wrap;
+}
+.header-logo img {
+  width: 72px;
+  height: auto;
+  filter: brightness(0) invert(1) drop-shadow(0 2px 8px rgba(0,0,0,0.3));
+  flex-shrink: 0;
+}
+.header-glow {
+  position: absolute; inset: 0; pointer-events: none;
+  background:
+    radial-gradient(ellipse at 15% 30%, rgba(109,179,63,0.18) 0%, transparent 55%),
+    radial-gradient(ellipse at 85% 70%, rgba(46,141,200,0.2) 0%, transparent 55%);
+}
+.brand-wrap { position: relative; z-index: 1; }
+
+.brand-logo {
+  font-family: 'Dancing Script', cursive;
+  font-size: clamp(3.5rem, 12vw, 6.5rem);
+  line-height: 1;
+  display: inline-block;
+  filter: drop-shadow(0 3px 10px rgba(0,0,0,0.3));
+}
+.brand-logo .ba  { color: #fff; }
+.brand-logo .R   { color: var(--verde); font-size: 1.18em; }
+.brand-logo .sa  { color: #cce8ff; }
+
+.brand-tagline {
+  font-size: clamp(0.72rem, 2.5vw, 0.95rem);
+  font-weight: 700;
+  letter-spacing: 0.28em;
+  text-transform: uppercase;
+  color: rgba(255,255,255,0.6);
+  margin-top: 0.4rem;
+}
+.orario-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  margin-top: 1.2rem;
+  background: rgba(255,255,255,0.13);
+  border: 1.5px solid rgba(255,255,255,0.35);
+  color: #fff;
+  font-size: 0.9rem;
+  font-weight: 700;
+  padding: 0.45rem 1.3rem;
+  border-radius: 50px;
+  letter-spacing: 0.04em;
+}
+
+/* ── NAV ── */
+nav {
+  background: var(--blu);
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  box-shadow: 0 3px 14px rgba(13,59,122,0.35);
+}
+nav a {
+  color: rgba(255,255,255,0.85);
+  text-decoration: none;
+  font-weight: 800;
+  font-size: 0.8rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  padding: 0.85rem 1rem;
+  transition: background 0.2s, color 0.2s;
+  border-bottom: 3px solid transparent;
+}
+nav a:hover, nav a:focus {
+  background: rgba(255,255,255,0.1);
+  color: var(--verde);
+  border-bottom-color: var(--verde);
+  outline: none;
+}
+
+/* ── HERO ── */
+.hero {
+  background: linear-gradient(160deg, var(--blu-med) 0%, #1a6faa 50%, var(--azzurro) 100%);
+  color: #fff;
+  padding: 2.8rem 1.5rem;
+  text-align: center;
+}
+.hero-claim {
+  font-family: 'Playfair Display', serif;
+  font-style: italic;
+  font-size: clamp(1.5rem, 5vw, 2.6rem);
+  color: #fff;
+  max-width: 680px;
+  margin: 0 auto 0.8rem;
+  line-height: 1.3;
+}
+.hero-claim em { color: var(--verde); font-style: normal; }
+.hero-sub {
+  font-size: 1rem;
+  color: rgba(255,255,255,0.72);
+  max-width: 520px;
+  margin: 0 auto;
+}
+
+/* ── PAGE LAYOUT ── */
+.page-content { max-width: 980px; margin: 0 auto; padding: 0 1rem; }
+
+/* ── SECTION TITLES ── */
+.sec { padding: 2.6rem 0 0.8rem; }
+.sec-header {
+  display: flex; align-items: center; gap: 0.8rem; margin-bottom: 0.4rem;
+}
+.sec-icon { font-size: 2rem; line-height: 1; }
+.sec-title {
+  font-family: 'Playfair Display', serif;
+  font-size: clamp(1.6rem, 5vw, 2.2rem);
+  font-weight: 900;
+  color: var(--blu);
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+}
+.sec-rule {
+  height: 3px;
+  background: linear-gradient(90deg, var(--verde) 0%, var(--azzurro) 50%, transparent 90%);
+  border: none;
+  margin-bottom: 1.6rem;
+}
+
+/* ── SUB-CATEGORY LABEL ── */
+.sub-label {
+  font-size: 0.78rem;
+  font-weight: 800;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: var(--azzurro);
+  margin: 0.9rem 0 0.3rem;
+  padding-left: 0.2rem;
+}
+
+/* ── MENU TWO-COL GRID ── */
+.menu-2col {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 2rem;
+}
+@media (max-width: 640px) {
+  .menu-2col { grid-template-columns: 1fr; gap: 0; }
+}
+
+.menu-block { margin-bottom: 2rem; }
+.menu-block-title {
+  font-family: 'Playfair Display', serif;
+  font-size: 1.35rem;
+  font-weight: 700;
+  color: var(--blu-med);
+  border-bottom: 2px solid var(--carta);
+  padding-bottom: 0.35rem;
+  margin-bottom: 0.9rem;
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  position: relative;
+}
+.menu-block-title::after {
+  content: '';
+  position: absolute;
+  bottom: -2px; left: 0;
+  width: 50px; height: 2px;
+  background: var(--verde);
+}
+
+/* ── MENU ROW ── */
+.menu-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  padding: 0.42rem 0;
+  border-bottom: 1px dotted rgba(13,59,122,0.1);
+  gap: 0.8rem;
+}
+.menu-row:last-child { border-bottom: none; }
+
+.menu-name {
+  font-size: 1.25rem;
+  font-weight: 700;
+  color: var(--testo);
+  flex: 1;
+}
+.menu-var {
+  font-size: 1.05rem;
+  font-weight: 400;
+  color: var(--grigio);
+  margin-top: 0.08rem;
+  display: block;
+  font-style: italic;
+}
+.menu-allergeni {
+  font-size: 0.78rem;
+  color: var(--grigio);
+  font-weight: 400;
+  margin-left: 0.25rem;
+}
+.menu-ls {
+  display: inline-block;
+  background: var(--verde);
+  color: #fff;
+  font-size: 0.7rem;
+  font-weight: 800;
+  padding: 0.05rem 0.38rem;
+  border-radius: 50px;
+  vertical-align: middle;
+  margin-left: 0.3rem;
+}
+.menu-price {
+  font-family: 'Playfair Display', serif;
+  font-size: 1.35rem;
+  font-weight: 700;
+  color: var(--accent);
+  white-space: nowrap;
+  flex-shrink: 0;
+}
+.menu-frozen { font-size: 0.75rem; color: #2E8DC8; margin-left: 0.2rem; }
+.menu-gf { font-size: 0.75rem; color: var(--verde-sc); margin-left: 0.2rem; }
+
+/* ── VARIANTI PILL LIST ── */
+.pill-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.4rem;
+  margin: 0.3rem 0 0.8rem;
+}
+.pill {
+  background: var(--carta);
+  color: var(--blu);
+  border: 1px solid rgba(13,59,122,0.15);
+  font-size: 0.82rem;
+  font-weight: 600;
+  padding: 0.2rem 0.65rem;
+  border-radius: 50px;
+}
+
+/* ── GELATO GRID ── */
+.gelato-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
+  gap: 0.9rem;
+  margin-top: 0.5rem;
+}
+.gelato-card {
+  background: var(--bianco);
+  border-radius: 14px;
+  padding: 1rem 0.9rem;
+  text-align: center;
+  border: 1.5px solid var(--carta);
+  box-shadow: 0 2px 8px rgba(13,59,122,0.07);
+  transition: transform 0.2s, box-shadow 0.2s;
+}
+.gelato-card:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 6px 18px rgba(13,59,122,0.14);
+}
+.gelato-emoji { font-size: 1.9rem; display: block; margin-bottom: 0.45rem; }
+.gelato-name {
+  font-family: 'Playfair Display', serif;
+  font-size: 0.98rem;
+  font-weight: 700;
+  color: var(--blu);
+  line-height: 1.3;
+  margin-bottom: 0.35rem;
+}
+.gelato-price { font-size: 1.1rem; font-weight: 800; color: var(--accent); }
+
+/* ── ALLERGENI BOX ── */
+.allergeni-wrap {
+  background: var(--carta);
+  border-radius: 14px;
+  padding: 1.6rem;
+  margin: 2rem 0;
+  border-left: 4px solid var(--azzurro);
+}
+.allergeni-title {
+  font-size: 0.98rem;
+  font-weight: 700;
+  color: var(--blu);
+  margin-bottom: 1rem;
+}
+.allergeni-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+  gap: 0.35rem 1.2rem;
+}
+.allergeni-item { font-size: 0.86rem; color: var(--grigio); display: flex; gap: 0.4rem; }
+.allergeni-num { font-weight: 800; color: var(--blu-med); min-width: 1.2rem; }
+.legenda-wrap { margin-top: 1.1rem; display: flex; flex-wrap: wrap; gap: 0.9rem; }
+.legenda-item { display: flex; align-items: center; gap: 0.4rem; font-size: 0.86rem; color: var(--grigio); }
+
+/* ── INFO ── */
+.info-cards {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(195px, 1fr));
+  gap: 1.1rem;
+  margin-top: 0.5rem;
+}
+.info-card {
+  background: var(--bianco);
+  border-radius: 14px;
+  padding: 1.3rem 1.1rem;
+  text-align: center;
+  border-top: 4px solid var(--verde);
+  box-shadow: 0 2px 8px rgba(13,59,122,0.07);
+}
+.info-card .ic { font-size: 2rem; display: block; margin-bottom: 0.5rem; }
+.info-card h3 { font-family: 'Playfair Display', serif; font-size: 1.05rem; color: var(--blu); margin-bottom: 0.35rem; }
+.info-card p { font-size: 0.93rem; line-height: 1.6; }
+
+/* ── CTA ── */
+.cta-band {
+  background: linear-gradient(135deg, var(--blu) 0%, var(--blu-med) 100%);
+  color: #fff;
+  border-radius: 18px;
+  margin: 2.2rem 0 3rem;
+  padding: 2rem;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1.5rem;
+}
+.cta-band h3 { font-family: 'Playfair Display', serif; font-size: 1.4rem; color: var(--verde); margin-bottom: 0.5rem; }
+.cta-band p { font-size: 1rem; color: rgba(255,255,255,0.78); line-height: 1.8; }
+.btn-call {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  background: var(--verde);
+  color: #fff;
+  font-weight: 800;
+  font-size: 1.05rem;
+  padding: 0.85rem 2rem;
+  border-radius: 50px;
+  text-decoration: none;
+  white-space: nowrap;
+  transition: background 0.2s, transform 0.2s;
+  box-shadow: 0 4px 16px rgba(109,179,63,0.4);
+}
+.btn-call:hover { background: var(--verde-sc); transform: translateY(-2px); outline: none; }
+
+/* ── DIVIDER ── */
+.divider { border: none; border-top: 1.5px dashed rgba(13,59,122,0.12); margin: 0.5rem 0; }
+
+/* ── FOOTER ── */
+footer {
+  background: var(--blu);
+  color: rgba(255,255,255,0.55);
+  text-align: center;
+  padding: 1.6rem 1rem;
+  font-size: 0.87rem;
+}
+footer strong { color: var(--verde); }
+
+@media (max-width: 480px) {
+  nav a { font-size: 0.72rem; padding: 0.72rem 0.65rem; }
+  .menu-name { font-size: 0.97rem; }
+}
+@media (prefers-reduced-motion: reduce) { *, *::before, *::after { transition: none !important; } }
+</style>
+</head>
+<body>
+
+<!-- HEADER -->
+<header>
+  <div class="header-glow"></div>
+  <div class="brand-wrap">
+    <div class="brand-logo">
+      <span class="ba">Ba</span><span class="R">R</span><span class="sa">sa</span>
+    </div>
+    <div class="brand-tagline">Il piacere di stare insieme ♡</div>
+    <div class="orario-pill">🕗 Lun–Ven 8:30–18:00 &nbsp;|&nbsp; Sab 14:00–18:00</div>
+  </div>
+</header>
+
+<!-- NAV -->
+<nav aria-label="Navigazione">
+  <a href="#caffetteria">☕ Caffetteria</a>
+  <a href="#bevande">🥤 Bevande</a>
+  <a href="#snack">🍟 Snack</a>
+  <a href="#dolci">🥐 Dolci</a>
+  <a href="#food">🥪 Food</a>
+  <a href="#gelato">🍦 Gelato</a>
+  <a href="#allergeni">⚠️ Allergeni</a>
+  <a href="#info">ℹ️ Info</a>
+</nav>
+
+<!-- HERO -->
+<div class="hero">
+  <p class="hero-claim">Dove ogni giorno ha il <em>sapore di casa</em></p>
+  <p class="hero-sub">Il BaRsa è il cuore della nostra RSA: un posto caldo dove fermarsi, gustare qualcosa di buono e godersi la compagnia.</p>
+</div>
+
+<div class="page-content">
+
+<!-- ═══ CAFFETTERIA ═══ -->
+<section class="sec" id="caffetteria">
+  <div class="sec-header">
+    <span class="sec-icon">☕</span>
+    <h2 class="sec-title">Caffetteria</h2>
+  </div>
+  <hr class="sec-rule"/>
+
+  <div class="menu-block">
+    <div class="menu-row"><span class="menu-name">Caffè Espresso <span class="menu-allergeni">1</span></span><span class="menu-price">€ 1,00</span></div>
+    <div class="menu-row"><span class="menu-name">Caffè Macchiato <span class="menu-allergeni">1,7</span><span class="menu-ls">LS</span></span><span class="menu-price">€ 1,10</span></div>
+    <div class="menu-row"><span class="menu-name">Caffè Decaffeinato <span class="menu-allergeni">1</span><span class="menu-ls">LS</span></span><span class="menu-price">€ 1,10</span></div>
+    <div class="menu-row"><span class="menu-name">Caffè Ginseng <span class="menu-allergeni">1,7</span><span class="menu-ls">LS</span></span><span class="menu-price">€ 1,20</span></div>
+    <div class="menu-row"><span class="menu-name">Caffè d'Orzo <span class="menu-allergeni">1,7</span><span class="menu-ls">LS</span></span><span class="menu-price">€ 1,20</span></div>
+    <div class="menu-row"><span class="menu-name">Cappuccino <span class="menu-allergeni">1,7</span><span class="menu-ls">LS</span></span><span class="menu-price">€ 1,50</span></div>
+    <div class="menu-row"><span class="menu-name">Caffè Marocchino <span class="menu-allergeni">1,7</span><span class="menu-ls">LS</span></span><span class="menu-price">€ 1,50</span></div>
+    <div class="menu-row"><span class="menu-name">Macchiatone <span class="menu-allergeni">7</span><span class="menu-ls">LS</span></span><span class="menu-price">€ 1,20</span></div>
+    <div class="menu-row"><span class="menu-name">Crema al Caffè <span class="menu-allergeni">1,7</span></span><span class="menu-price">€ 2,50 / 3,00</span></div>
+    <div class="menu-row"><span class="menu-name">Latte Macchiato <span class="menu-allergeni">7</span><span class="menu-ls">LS</span></span><span class="menu-price">€ 2,00 / 2,50</span></div>
+    <div class="menu-row"><span class="menu-name">Thè Caldo</span><span class="menu-price">€ 2,00</span></div>
+    <div class="menu-row">
+      <span class="menu-name">Cioccolata Calda <span class="menu-allergeni">7</span><span class="menu-ls">LS</span>
+        <span class="menu-var">Classica · Fondente · Bianca</span>
+      </span>
+      <span class="menu-price">€ 3,00</span>
+    </div>
+  </div>
+</section>
+
+<hr class="divider"/>
+
+<!-- ═══ BEVANDE ═══ -->
+<section class="sec" id="bevande">
+  <div class="sec-header">
+    <span class="sec-icon">🥤</span>
+    <h2 class="sec-title">Bevande</h2>
+  </div>
+  <hr class="sec-rule"/>
+
+  <div class="menu-2col">
+    <div class="menu-block">
+      <div class="menu-block-title">💧 Acqua & Bibite</div>
+      <div class="menu-row">
+        <span class="menu-name">
+          Acqua
+          <span class="menu-var">Naturale · Frizzante</span>
+        </span>
+        <span class="menu-price">€ 1,00</span>
+      </div>
+      <div class="menu-row">
+        <span class="menu-name">
+          Bibite <span class="menu-allergeni">12</span>
+          <span class="menu-var">Coca-Cola · Coca-Cola Zero · Fanta · Fanta Zero · Lemonsoda · Lemonsoda Zero · Chinò · Tonica</span>
+        </span>
+        <span class="menu-price">€ 2,50</span>
+      </div>
+      <div class="menu-row">
+        <span class="menu-name">
+          Cedrata <span class="menu-allergeni">12</span>
+        </span>
+        <span class="menu-price">€ 2,50</span>
+      </div>
+      <div class="menu-row">
+        <span class="menu-name">
+          Crodino <span class="menu-allergeni">12</span>
+        </span>
+        <span class="menu-price">€ 2,50</span>
+      </div>
+      <div class="menu-row">
+        <span class="menu-name">
+          Sanbitter <span class="menu-allergeni">12</span>
+        </span>
+        <span class="menu-price">€ 2,50</span>
+      </div>
+      <div class="menu-row">
+        <span class="menu-name">
+          Estathè
+          <span class="menu-var">Limone · Pesca</span>
+        </span>
+        <span class="menu-price">€ 2,50</span>
+      </div>
+    </div>
+
+    <div class="menu-block">
+      <div class="menu-block-title">🍊 Succhi & Analcolici</div>
+
+      <div class="menu-row">
+        <span class="menu-name">
+          Succo di frutta
+          <span class="menu-var">Pera · Pesca · Albicocca · Ananas · ACE · Mela verde · Mirtillo</span>
+        </span>
+        <span class="menu-price">€ 2,50</span>
+      </div>
+      <div class="menu-row">
+        <span class="menu-name">
+          Granita
+          <span class="menu-var">Tamarindo · Fragola · Menta</span>
+        </span>
+        <span class="menu-price">€ 3,00</span>
+      </div>
+
+      <div class="sub-label">Bevande analcoliche</div>
+      <div class="menu-row">
+        <span class="menu-name">Birra Analcolica <span class="menu-allergeni">1</span></span>
+        <span class="menu-price">€ 3,50</span>
+      </div>
+      <div class="menu-row">
+        <span class="menu-name">Mojito Analcolico</span>
+        <span class="menu-price">€ 3,50</span>
+      </div>
+      <div class="menu-row">
+        <span class="menu-name">Spritz Analcolico</span>
+        <span class="menu-price">€ 3,50</span>
+      </div>
+      <div class="menu-row">
+        <span class="menu-name">Spremuta d'Arancia</span>
+        <span class="menu-price">€ 3,50</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<hr class="divider"/>
+
+<!-- ═══ SNACK ═══ -->
+<section class="sec" id="snack">
+  <div class="sec-header">
+    <span class="sec-icon">🍟</span>
+    <h2 class="sec-title">Snack</h2>
+  </div>
+  <hr class="sec-rule"/>
+
+  <div class="menu-2col">
+    <div class="menu-block">
+      <div class="menu-block-title">🧂 Salato</div>
+      <div class="menu-row">
+        <span class="menu-name">
+          Patatine <span class="menu-allergeni">1</span>
+          <span class="menu-var">Classiche · Grill · Paprika · Formaggio</span>
+        </span>
+        <span class="menu-price">€ 1,00–1,50</span>
+      </div>
+      <div class="menu-row">
+        <span class="menu-name">
+          Pringles <span class="menu-allergeni">1,7</span>
+          <span class="menu-var">Classiche · Paprika</span>
+        </span>
+        <span class="menu-price">€ 2,00</span>
+      </div>
+      <div class="menu-row">
+        <span class="menu-name">Cipster / Fonzies <span class="menu-allergeni">1,7</span></span>
+        <span class="menu-price">€ 1,00</span>
+      </div>
+      <div class="menu-row">
+        <span class="menu-name">Taralli <span class="menu-allergeni">1,7,11,12,14</span></span>
+        <span class="menu-price">€ 0,70</span>
+      </div>
+      <div class="menu-row">
+        <span class="menu-name">
+          Frutta secca <span class="menu-allergeni">5,8</span>
+          <span class="menu-var">Mandorle sgusciate · Noci sgusciate · Energy mix (anacardi, arachidi, uva secca)</span>
+        </span>
+        <span class="menu-price">€ 1,50</span>
+      </div>
+    </div>
+
+    <div class="menu-block">
+      <div class="menu-block-title">🍬 Dolciumi</div>
+      <div class="menu-row">
+        <span class="menu-name">Kit Kat / Twix <span class="menu-allergeni">1,6,7,8</span></span>
+        <span class="menu-price">€ 1,50</span>
+      </div>
+      <div class="menu-row">
+        <span class="menu-name">Kinder Bueno <span class="menu-allergeni">1,6,7,8</span></span>
+        <span class="menu-price">€ 1,50</span>
+      </div>
+      <div class="menu-row">
+        <span class="menu-name">Biscotti Baiocchi <span class="menu-allergeni">1,3,6,7,8</span></span>
+        <span class="menu-price">€ 1,00</span>
+      </div>
+      <div class="menu-row">
+        <span class="menu-name">Biscotti Wafer <span class="menu-allergeni">1,6,7,8</span></span>
+        <span class="menu-price">€ 0,50</span>
+      </div>
+      <div class="menu-row">
+        <span class="menu-name">Caramelle <span class="menu-allergeni">1,7</span></span>
+        <span class="menu-price">€ 1,00–2,50</span>
+      </div>
+      <div class="menu-row">
+        <span class="menu-name">Chupa Chupa <span class="menu-allergeni">1</span></span>
+        <span class="menu-price">€ 0,50</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<hr class="divider"/>
+
+<!-- ═══ DOLCI ═══ -->
+<section class="sec" id="dolci">
+  <div class="sec-header">
+    <span class="sec-icon">🎂</span>
+    <h2 class="sec-title">Dolci & Pasticceria</h2>
+  </div>
+  <hr class="sec-rule"/>
+
+  <div class="menu-2col">
+    <div class="menu-block">
+      <div class="menu-block-title">🥐 Lievitati</div>
+
+      <div class="menu-row">
+        <span class="menu-name">
+          Cornetto <span class="menu-allergeni">1,3,6,7,8</span> <span class="menu-frozen">❄</span>
+          <span class="menu-var">Vuoto · Cioccolato · Marmellata · Crema</span>
+        </span>
+        <span class="menu-price">€ 1,20</span>
+      </div>
+      <div class="menu-row">
+        <span class="menu-name">
+          Ciambella <span class="menu-allergeni">1,3,6,7,8,10,11</span> <span class="menu-frozen">❄</span>
+          <span class="menu-var">Vuota · Crema</span>
+        </span>
+        <span class="menu-price">€ 1,20</span>
+      </div>
+      <div class="menu-row">
+        <span class="menu-name">
+          Krapfen <span class="menu-allergeni">1,3,6,7,8,10,11</span> <span class="menu-frozen">❄</span>
+          <span class="menu-var">Vuoto · Marmellata · Cioccolato</span>
+        </span>
+        <span class="menu-price">€ 1,20</span>
+      </div>
+      <div class="menu-row">
+        <span class="menu-name">
+          Muffin <span class="menu-allergeni">1,3,7,8</span> <span class="menu-frozen">❄</span>
+          <span class="menu-var">Classico · Cioccolato · Red Velvet</span>
+        </span>
+        <span class="menu-price">€ 1,20</span>
+      </div>
+      <div class="menu-row">
+        <span class="menu-name">
+          Abaribi <span class="menu-allergeni">1,3,6,7,8,10</span>
+          <span class="menu-var">Treccia con uva sultanina · Marmellata albicocca</span>
+        </span>
+        <span class="menu-price">€ 1,20</span>
+      </div>
+    </div>
+
+    <div class="menu-block">
+      <div class="menu-block-title">🍰 Torte & Dolci</div>
+      <div class="menu-row">
+        <span class="menu-name">Sfoglia mela e crema <span class="menu-allergeni">1,3,5,6,7,8,10,11,12</span> <span class="menu-frozen">❄</span></span>
+        <span class="menu-price">€ 1,50</span>
+      </div>
+      <div class="menu-row">
+        <span class="menu-name">Sfoglia treccia nocciolatte <span class="menu-allergeni">1,3,6,7,8</span> <span class="menu-frozen">❄</span></span>
+        <span class="menu-price">€ 1,50</span>
+      </div>
+      <div class="menu-row">
+        <span class="menu-name">Fetta di torta <span class="menu-allergeni">1,3,7,8</span></span>
+        <span class="menu-price">€ 1,50</span>
+      </div>
+      <div class="menu-row">
+        <span class="menu-name"><span class="menu-gf">🌾</span> Coccola cocco e cioccolato <span class="menu-allergeni">6,7,8</span> <span class="menu-frozen">❄</span></span>
+        <span class="menu-price">€ 1,50</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<hr class="divider"/>
+
+<!-- ═══ FOOD ═══ -->
+<section class="sec" id="food">
+  <div class="sec-header">
+    <span class="sec-icon">🥪</span>
+    <h2 class="sec-title">Food</h2>
+  </div>
+  <hr class="sec-rule"/>
+
+  <div class="menu-2col">
+    <div class="menu-block">
+      <div class="menu-block-title">🥖 Panini & Piadine</div>
+
+      <div class="menu-row">
+        <span class="menu-name">Focaccia Farcita
+          <span class="menu-var">Focaccia genovese all'olio, prosciutto cotto, formaggio Edamer</span>
+        </span>
+        <span class="menu-price">€ 4,50</span>
+      </div>
+      <div class="menu-row">
+        <span class="menu-name">Toast
+          <span class="menu-var">Pane americano, prosciutto cotto, formaggio Edamer</span>
+        </span>
+        <span class="menu-price">€ 4,50</span>
+      </div>
+      <div class="menu-row">
+        <span class="menu-name">Trancio Pizza
+          <span class="menu-var">Pasta da pizza, pomodoro, formaggio Edamer</span>
+        </span>
+        <span class="menu-price">€ 4,00</span>
+      </div>
+      <div class="menu-row">
+        <span class="menu-name">Panino Valdostano
+          <span class="menu-var">Pane ciabattina di semola, speck, formaggio a pasta molle</span>
+        </span>
+        <span class="menu-price">€ 4,50</span>
+      </div>
+      <div class="menu-row">
+        <span class="menu-name">Panino Vegetariano
+          <span class="menu-var">Pane al mais, verdure grigliate, formaggio Edamer</span>
+        </span>
+        <span class="menu-price">€ 4,50</span>
+      </div>
+      <div class="menu-row">
+        <span class="menu-name">Panino Raffinato
+          <span class="menu-var">Pane ai semi, salmone affumicato norvegese, salsa al formaggio spalmabile</span>
+        </span>
+        <span class="menu-price">€ 5,00</span>
+      </div>
+      <div class="menu-row">
+        <span class="menu-name">Panino Cotoletta
+          <span class="menu-var">Pane di farina tipo "0", cotoletta di filetto di pollo</span>
+        </span>
+        <span class="menu-price">€ 5,00</span>
+      </div>
+      <div class="menu-row">
+        <span class="menu-name">Panino Napoletano
+          <span class="menu-var">Pane farina tipo 00, salame piccante, scamorza</span>
+        </span>
+        <span class="menu-price">€ 4,50</span>
+      </div>
+      <div class="menu-row">
+        <span class="menu-name">Piadina Cotto
+          <span class="menu-var">Piada, prosciutto cotto, formaggio Edamer</span>
+        </span>
+        <span class="menu-price">€ 4,50</span>
+      </div>
+      <div class="menu-row">
+        <span class="menu-name">Piadina Crudo
+          <span class="menu-var">Piada, prosciutto crudo, formaggio Edamer</span>
+        </span>
+        <span class="menu-price">€ 4,50</span>
+      </div>
+      <div class="menu-row">
+        <span class="menu-name">Schiacciata al Crudo
+          <span class="menu-var">Schiacciata, prosciutto crudo, formaggio Edamer</span>
+        </span>
+        <span class="menu-price">€ 4,50</span>
+      </div>
+    </div>
+
+    <div class="menu-block" style="display:flex; flex-direction:column; gap:1.2rem; justify-content:flex-start; padding-top:0.4rem;">
+
+      <!-- Box personalizzazioni -->
+      <div style="background: linear-gradient(135deg,#e8f5e9,#f0f9ff); border-radius:14px; padding:1.4rem 1.3rem; border-left:4px solid var(--verde); box-shadow:0 2px 10px rgba(13,59,122,0.07);">
+        <div style="font-family:'Playfair Display',serif; font-size:1.1rem; font-weight:700; color:var(--verde-sc); margin-bottom:0.7rem;">✨ Personalizza il tuo panino</div>
+        <p style="font-size:1rem; color:var(--grigio); margin-bottom:0.8rem;">Su richiesta puoi aggiungere:</p>
+        <div style="display:flex; flex-wrap:wrap; gap:0.5rem;">
+          <span style="background:#fff; border:1.5px solid var(--verde); color:var(--verde-sc); font-size:0.95rem; font-weight:700; padding:0.3rem 0.8rem; border-radius:50px;">🫙 Maionese</span>
+          <span style="background:#fff; border:1.5px solid var(--verde); color:var(--verde-sc); font-size:0.95rem; font-weight:700; padding:0.3rem 0.8rem; border-radius:50px;">🍅 Ketchup</span>
+          <span style="background:#fff; border:1.5px solid var(--verde); color:var(--verde-sc); font-size:0.95rem; font-weight:700; padding:0.3rem 0.8rem; border-radius:50px;">🥬 Insalata</span>
+          <span style="background:#fff; border:1.5px solid var(--verde); color:var(--verde-sc); font-size:0.95rem; font-weight:700; padding:0.3rem 0.8rem; border-radius:50px;">🍅 Pomodoro</span>
+        </div>
+      </div>
+
+      <!-- Box allergeni -->
+      <div style="background:var(--carta); border-radius:12px; padding:1.2rem 1.3rem; font-size:0.92rem; color:var(--grigio); border-left:4px solid var(--azzurro);">
+        <strong style="color:var(--blu);">⚠️ Allergeni nei prodotti Food</strong><br/>
+        In questi prodotti sono contenuti i seguenti allergeni:<br/>
+        <span style="color:var(--blu-med); font-weight:700;">1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 13, 14</span>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<hr class="divider"/>
+
+<!-- ═══ GELATERIA ═══ -->
+<section class="sec" id="gelato">
+  <div class="sec-header">
+    <span class="sec-icon">🍦</span>
+    <h2 class="sec-title">Gelateria RSA</h2>
+  </div>
+  <hr class="sec-rule"/>
+  <p style="font-size:0.93rem; color:var(--grigio); margin-bottom:1.4rem;">Gelati <strong style="color:var(--blu);">Sammontana</strong> – Gelati all'italiana</p>
+
+  <!-- CONI -->
+  <div class="sub-label" style="font-size:1rem; color:var(--blu); margin-bottom:0.7rem;">🍦 Coni</div>
+  <div class="gelato-grid" style="margin-bottom:1.8rem;">
+    <div class="gelato-card"><span class="gelato-emoji">🍦</span><div class="gelato-name">Cono alla Panna</div><div class="gelato-price">€ 2,50</div></div>
+    <div class="gelato-card"><span class="gelato-emoji">🌾</span><div class="gelato-name">Cono Senza Glutine Nocciola</div><div class="gelato-price">€ 2,80</div></div>
+    <div class="gelato-card"><span class="gelato-emoji">🏅</span><div class="gelato-name">Cono Croccantino Mandorla</div><div class="gelato-price">€ 2,80</div></div>
+    <div class="gelato-card"><span class="gelato-emoji">🥛</span><div class="gelato-name">Sansonì</div><div class="gelato-price">€ 2,80</div></div>
+  </div>
+
+  <!-- COPPE -->
+  <div class="sub-label" style="font-size:1rem; color:var(--blu); margin-bottom:0.7rem;">🍨 Coppe</div>
+  <div class="gelato-grid" style="margin-bottom:1.8rem;">
+    <div class="gelato-card"><span class="gelato-emoji">🍫</span><div class="gelato-name">Coppa Cioccolato</div><div class="gelato-price">€ 3,00</div></div>
+    <div class="gelato-card"><span class="gelato-emoji">☕</span><div class="gelato-name">Coppa Caffè</div><div class="gelato-price">€ 3,00</div></div>
+    <div class="gelato-card"><span class="gelato-emoji">🍒</span><div class="gelato-name">Coppa Amarena</div><div class="gelato-price">€ 3,00</div></div>
+    <div class="gelato-card"><span class="gelato-emoji">🌈</span><div class="gelato-name">Coppa MixMax</div><div class="gelato-price">€ 2,50</div></div>
+  </div>
+
+  <!-- BON BON -->
+  <div class="sub-label" style="font-size:1rem; color:var(--blu); margin-bottom:0.7rem;">🍬 Altro</div>
+  <div class="gelato-grid" style="margin-bottom:1.8rem;">
+    <div class="gelato-card"><span class="gelato-emoji">🍬</span><div class="gelato-name">Bon Bon</div><div class="gelato-price">€ 2,80</div></div>
+  </div>
+
+  <!-- STECCHI -->
+  <div class="sub-label" style="font-size:1rem; color:var(--blu); margin-bottom:0.7rem;">🍡 Stecchi</div>
+  <div class="gelato-grid" style="margin-bottom:1.8rem;">
+    <div class="gelato-card"><span class="gelato-emoji">🟢</span><div class="gelato-name">Gruvi Pistacchio</div><div class="gelato-price">€ 2,90</div></div>
+    <div class="gelato-card"><span class="gelato-emoji">🥥</span><div class="gelato-name">Gruvi Cocco</div><div class="gelato-price">€ 2,90</div></div>
+    <div class="gelato-card"><span class="gelato-emoji">🍫</span><div class="gelato-name">Stecco Ducale</div><div class="gelato-price">€ 2,50</div></div>
+  </div>
+
+  <!-- GHIACCIOLI & ALTRO -->
+  <div class="sub-label" style="font-size:1rem; color:var(--blu); margin-bottom:0.7rem;">🧊 Ghiaccioli & Biscotto</div>
+  <div class="gelato-grid">
+    <div class="gelato-card"><span class="gelato-emoji">🥤</span><div class="gelato-name">Long John Coca-Cola</div><div class="gelato-price">€ 2,00</div></div>
+    <div class="gelato-card"><span class="gelato-emoji">🌈</span><div class="gelato-name">Ghiacciolo</div><div class="gelato-price">€ 1,00</div></div>
+    <div class="gelato-card"><span class="gelato-emoji">🍪</span><div class="gelato-name">Biscotto Duetto</div><div class="gelato-price">€ 2,70</div></div>
+  </div>
+</section>
+
+<hr class="divider"/>
+
+<!-- ═══ ALLERGENI ═══ -->
+<section class="sec" id="allergeni">
+  <div class="sec-header">
+    <span class="sec-icon">⚠️</span>
+    <h2 class="sec-title">Allergeni</h2>
+  </div>
+  <hr class="sec-rule"/>
+  <div class="allergeni-wrap">
+    <div class="allergeni-title">📋 La lista allergeni completa e le schede tecniche dei prodotti possono essere richieste ai baristi</div>
+    <div class="allergeni-grid">
+      <div class="allergeni-item"><span class="allergeni-num">1</span> Cereali contenenti glutine</div>
+      <div class="allergeni-item"><span class="allergeni-num">2</span> Crostacei e prodotti a base di crostacei</div>
+      <div class="allergeni-item"><span class="allergeni-num">3</span> Uova e prodotti a base di uova</div>
+      <div class="allergeni-item"><span class="allergeni-num">4</span> Pesce e prodotti a base di pesce</div>
+      <div class="allergeni-item"><span class="allergeni-num">5</span> Arachidi e prodotti a base di arachidi</div>
+      <div class="allergeni-item"><span class="allergeni-num">6</span> Soia e prodotti a base di soia</div>
+      <div class="allergeni-item"><span class="allergeni-num">7</span> Latte e prodotti a base di latte</div>
+      <div class="allergeni-item"><span class="allergeni-num">8</span> Frutta a guscio</div>
+      <div class="allergeni-item"><span class="allergeni-num">9</span> Sedano e prodotti a base di sedano</div>
+      <div class="allergeni-item"><span class="allergeni-num">10</span> Senape e prodotti a base di senape</div>
+      <div class="allergeni-item"><span class="allergeni-num">11</span> Semi di sesamo e prodotti a base di sesamo</div>
+      <div class="allergeni-item"><span class="allergeni-num">12</span> Anidride solforosa e solfiti</div>
+      <div class="allergeni-item"><span class="allergeni-num">13</span> Lupini e prodotti a base di lupini</div>
+      <div class="allergeni-item"><span class="allergeni-num">14</span> Molluschi e prodotti a base di molluschi</div>
+    </div>
+    <div class="legenda-wrap">
+      <div class="legenda-item">
+        <span style="background:var(--verde);color:#fff;font-size:0.62rem;font-weight:800;padding:0.05rem 0.35rem;border-radius:50px;">LS</span>
+        Preparabile con latte di soia su richiesta
+      </div>
+      <div class="legenda-item"><span style="color:#2E8DC8;font-size:1rem;">❄</span> Materia prima surgelata all'origine</div>
+      <div class="legenda-item"><span style="color:var(--verde-sc);font-size:0.95rem;">🌾</span> Prodotto senza glutine</div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ INFO ═══ -->
+<section class="sec" id="info">
+  <div class="sec-header">
+    <span class="sec-icon">ℹ️</span>
+    <h2 class="sec-title">Informazioni</h2>
+  </div>
+  <hr class="sec-rule"/>
+  <div class="info-cards">
+    <div class="info-card">
+      <span class="ic">🕗</span>
+      <h3>Orari</h3>
+      <p><strong>Lun – Ven</strong><br/>8:30 – 18:00<br/><br/><strong>Sabato</strong><br/>14:00 – 18:00</p>
+    </div>
+    <div class="info-card">
+      <span class="ic">📍</span>
+      <h3>Dove siamo</h3>
+      <p>Pianterreno · Ingresso principale<br/>nella Hall<br/><strong>Fondazione Casa di Soggiorno per Anziani – ETS</strong></p>
+    </div>
+    <div class="info-card">
+      <span class="ic">♿</span>
+      <h3>Accessibilità</h3>
+      <p>Completamente accessibile con sedia a rotelle. Tavoli alti e bassi disponibili.</p>
+    </div>
+    <div class="info-card">
+      <span class="ic">🌾</span>
+      <h3>Diete speciali</h3>
+      <p>Senza glutine, senza lattosio e latte di soia disponibili su richiesta.</p>
+    </div>
+    <div class="info-card">
+      <span class="ic">💳</span>
+      <h3>Pagamento</h3>
+      <p>Contanti, bancomat e tessera prepagata interna.</p>
+    </div>
+    <div class="info-card">
+      <span class="ic">👨‍👩‍👦</span>
+      <h3>Familiari</h3>
+      <p>I visitatori sono sempre benvenuti durante gli orari di apertura.</p>
+    </div>
+  </div>
+  <div class="cta-band">
+    <div>
+      <h3>Vieni a trovarci</h3>
+      <p>📍 Fondazione Casa di Soggiorno per Anziani – ETS<br/>Via Sonvigo, 22<br/>📞 <strong>030 674377</strong></p>
+    </div>
+    <a href="tel:030674377" class="btn-call">📞 Chiama il bar</a>
+  </div>
+</section>
+
+</div><!-- /page-content -->
+
+<footer>
+  <p><strong>BaRsa</strong> &mdash; Dove ogni giorno ha il sapore di casa ♡<br/>
+  <small>© 2025 Fondazione Casa di Soggiorno per Anziani – ETS</small></p>
+</footer>
+
+</body>
+</html>
